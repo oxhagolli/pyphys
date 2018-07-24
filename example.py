@@ -7,6 +7,7 @@ class Example(core.EngineBase):
 
     def setup(self):
         pygame.display.set_mode((640, 480))
+        self.frame_rate = 60
 
     def update(self):
         pass
