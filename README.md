@@ -1,4 +1,4 @@
-# py2d
+# pyphys
 
 2D Python game library built on top of pygame for faster and better
 physics simulation. Primarily, we are concerned with better collision
