@@ -1,4 +1,7 @@
 .idea/
+dist/
+build/
+pyphys.egg-info/
 *.iml
 out
 gen
