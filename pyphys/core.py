@@ -17,11 +17,19 @@ class EngineBase:
         self.clock = pygame.time.Clock()
         self.timedelta = 0  # Use to avoid skip-frames
         self.last_check = time.time()
-
+        self.backgrounds = []
+        self.object_groups = {}
         self.setup()
         loop_flag = True
         while loop_flag:
+            self.pressed = pygame.key.get_pressed()
             self.update()
+            for background in self.backgrounds:
+                background.render()
+            for key in sorted(self.object_groups):
+                for item in self.object_groups[key]:
+                    item.render()
+            pygame.display.flip()
             self.timedelta = time.time() - self.last_check
             self.last_check = time.time()
             if self.frame_rate >= 0:
@@ -38,3 +46,15 @@ class EngineBase:
     @abc.abstractmethod
     def update(self):
         pass
+
+    def register_object(self, o, level):
+        if level in self.object_groups.keys():
+            self.object_groups[level].append(o)
+        else:
+            self.object_groups[level] = [o]
+
+    def destroy_object(self, o, level):
+        self.object_groups[level].remove(o)
+
+    def register_background(self, o):
+        self.backgrounds.append(o)
